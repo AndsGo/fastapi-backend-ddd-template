@@ -1,0 +1,116 @@
+[importlinter]
+root_package = app
+include_external_packages = True
+
+[importlinter:contract:application-does-not-import-services]
+name = Application use cases must not depend on services layer
+type = forbidden
+source_modules =
+    app.application
+forbidden_modules =
+    app.services
+
+[importlinter:contract:application-does-not-import-adapters-or-infrastructure]
+name = Application must not import interface adapters or infrastructure directly
+type = forbidden
+source_modules =
+    app.application
+forbidden_modules =
+    app.interface
+    app.infrastructure
+allow_indirect_imports = True
+
+[importlinter:contract:application-ports-are-technology-neutral]
+name = Application ports must stay technology neutral
+type = forbidden
+source_modules =
+    app.application.ports
+forbidden_modules =
+    app.interface
+    app.infrastructure
+    app.config
+    app.application.dto
+    fastapi
+    sqlalchemy
+    redis
+    pydantic
+
+[importlinter:contract:persistence-models-are-persistence-only]
+name = Persistence models must not import upper layers
+type = forbidden
+source_modules =
+    app.infrastructure.persistence.models
+forbidden_modules =
+    app.interface
+    app.application
+    app.services
+    app.infrastructure.persistence.repositories
+    app.infrastructure.jobs
+
+[importlinter:contract:persistence-repositories-depend-only-on-ports-models-domain]
+name = Persistence repositories must depend only on ports, models, and domain
+type = forbidden
+source_modules =
+    app.infrastructure.persistence.repositories
+forbidden_modules =
+    app.interface
+    app.application.audit_logs
+    app.application.dto
+    app.application.errors
+    app.application.examples
+    app.application.jobs
+    app.application.security
+    app.application.scheduled_jobs
+    app.services
+    app.infrastructure.jobs
+
+[importlinter:contract:domain-is-framework-free]
+name = Domain layer must depend only on shared primitives
+type = forbidden
+source_modules =
+    app.domain
+forbidden_modules =
+    fastapi
+    sqlalchemy
+    redis
+    pydantic
+    app.config
+    app.application
+    app.services
+    app.utils
+    app.infrastructure
+    app.interface
+
+[importlinter:contract:interface-calls-application]
+name = Interface layer must not bypass application use cases
+type = forbidden
+source_modules =
+    app.interface
+forbidden_modules =
+    app.services
+    app.infrastructure
+    app.infrastructure.persistence
+    app.infrastructure.database
+ignore_imports =
+    app.interface.http.v1.providers -> app.infrastructure.database.session
+    app.interface.http.v1.providers -> app.infrastructure.persistence.repositories.audit_log_repository
+    app.interface.http.v1.providers -> app.infrastructure.persistence.repositories.example_repository
+    app.interface.http.v1.providers -> app.infrastructure.persistence.repositories.scheduled_job_repository
+    app.interface.jobs.runner -> app.infrastructure.cache.redis
+    app.interface.jobs.runner -> app.infrastructure.database.session
+    app.interface.jobs.runner -> app.infrastructure.jobs.locks
+    app.interface.jobs.runner -> app.infrastructure.jobs.logging
+    app.interface.jobs.runner -> app.infrastructure.jobs.registry
+    app.interface.jobs.runner -> app.infrastructure.jobs.run_worker
+    app.interface.jobs.runner -> app.infrastructure.jobs.scheduler
+    app.interface.jobs.runner -> app.infrastructure.logging.config
+    app.interface.jobs.runner -> app.infrastructure.persistence.repositories.scheduled_job_repository
+allow_indirect_imports = True
+
+[importlinter:contract:infrastructure-does-not-import-interface]
+name = Infrastructure layer must not import interface adapters
+type = forbidden
+source_modules =
+    app.infrastructure
+forbidden_modules =
+    app.interface

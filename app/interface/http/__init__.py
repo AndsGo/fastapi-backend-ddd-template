@@ -1,0 +1,1 @@
+"""Enterprise architecture package boundary."""
