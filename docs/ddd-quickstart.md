@@ -6,6 +6,8 @@
 
 一次 HTTP 请求的大致流向是：
 
+![HTTP 请求流程图](diagrams/request-flow.svg)
+
 ```text
 HTTP endpoint
   -> application use case
@@ -27,6 +29,12 @@ app/shared               # 稳定的跨层基础对象
 ```
 
 这个项目没有运行时 `app/services` 层。简单业务流程放在 application use case；纯业务规则放在 domain。
+
+## 先看整体架构
+
+![DDD 架构图](diagrams/ddd-architecture.svg)
+
+这张图的重点是：内层定义业务行为和能力契约，外层负责把 HTTP、数据库、Redis、任务调度等技术细节适配进来。`app/application/ports` 属于 application，它描述 use case 需要什么；`app/infrastructure` 里的 repository 是实现这些 port 的 adapter。
 
 ## 每层做什么
 
@@ -378,6 +386,10 @@ app/config/settings.py
 读取环境变量。其他代码从 `app.config` 导入 settings。
 
 ## 提交前检查
+
+依赖方向先按这张图自查：
+
+![依赖方向规则图](diagrams/dependency-rules.svg)
 
 提交前运行：
 

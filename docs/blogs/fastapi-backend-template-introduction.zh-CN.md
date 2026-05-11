@@ -7,7 +7,7 @@
 项目地址：
 
 ```text
-https://github.com/AndsGo/fastapi-backend-template
+https://github.com/AndsGo/fastapi-backend-ddd-template
 ```
 
 ## 为什么强调 DDD
@@ -30,6 +30,8 @@ HTTP、job handler、数据库、Redis、日志都是外部机制；用例编排
 ## 分层结构
 
 项目在 `app/` 下采用以下结构：
+
+![FastAPI 模板中的严格 DDD 分层](../diagrams/blog-ddd-overview.zh-CN.svg)
 
 ```text
 app/domain          # 纯业务规则、枚举、值对象、领域策略
@@ -154,6 +156,8 @@ HTTP 和 job 的 composition root 负责把 infrastructure repository 注入 app
 ## Interface：HTTP 和 Job 都只是入口适配器
 
 `app/interface/http` 负责 HTTP 协议、请求解析、响应 schema 和依赖注入。`app/interface/jobs/handlers` 负责后台任务入口。
+
+![一次 HTTP 请求在模板中的流动方式](../diagrams/blog-request-flow.zh-CN.svg)
 
 模板明确禁止：
 

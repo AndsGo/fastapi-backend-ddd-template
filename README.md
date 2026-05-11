@@ -127,6 +127,7 @@ control.
 ## Continuous Integration
 
 GitHub Actions runs the same verification commands on pushes and pull requests to `main`.
+GitLab CI runs the same gate through `.gitlab-ci.yml`.
 
 ## Main Docs
 

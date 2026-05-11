@@ -63,6 +63,8 @@ python -c "from importlinter.cli import lint_imports_command; lint_imports_comma
 python -m mypy app
 ```
 
+GitHub Actions 和 GitLab CI 都会运行同一组 gate。GitLab 使用仓库根目录的 `.gitlab-ci.yml`。
+
 ## 作为模板使用
 
 新增业务模块时，参考现有 `examples` 模块：

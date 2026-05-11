@@ -27,6 +27,11 @@ from `app.config`.
 
 ## Target Dependency Direction
 
+The editable draw.io sources live beside the rendered SVGs under
+`docs/diagrams/`.
+
+![DDD-oriented modular monolith architecture](diagrams/ddd-architecture.svg)
+
 ```text
 interface/http, interface/jobs/handlers -> application
 interface composition roots -> infrastructure implementations -> application use cases
@@ -65,6 +70,17 @@ Domain policy functions must be deterministic and framework-free. They may
 return domain enum/value-object decisions, but must not import FastAPI,
 SQLAlchemy, Pydantic, Redis, repositories, services, infrastructure, interface
 adapters, config, or application modules.
+
+## Request Flow
+
+![HTTP request flow through the DDD layers](diagrams/request-flow.svg)
+
+For HTTP delivery, endpoint modules receive protocol input, validate it with
+HTTP schemas, map it to application DTOs, and call application use cases. The
+use case depends on provider-neutral ports. Infrastructure repositories satisfy
+those ports and own the SQLAlchemy model/query details. Interface composition
+roots are the only HTTP-side files that wire concrete infrastructure adapters
+into use cases.
 
 ## Context And Permissions
 
@@ -147,6 +163,8 @@ application projects.
 12. Update docs.
 
 ## DDD Dependency Rules
+
+![Dependency direction rules](diagrams/dependency-rules.svg)
 
 ```text
 interface/http -> application
