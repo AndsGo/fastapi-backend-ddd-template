@@ -1,0 +1,45 @@
+<mxfile host="app.diagrams.net" modified="2026-05-11T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="blog-ddd-overview-zh-cn" name="博客 DDD 分层总览">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1280" pageHeight="760" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="FastAPI 模板中的严格 DDD 分层" style="text;html=1;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="280" y="20" width="720" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="业务意图向内收敛，技术细节向外隔离" style="text;html=1;strokeColor=none;fillColor=none;fontSize=16;align=center;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="320" y="66" width="640" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="interface" value="入口适配层&#xa;app/interface&#xa;&#xa;HTTP endpoint、schema、job handler&#xa;负责协议适配和依赖组装" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="160" width="260" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="application" value="应用层&#xa;app/application&#xa;&#xa;use case、DTO、ports、应用异常&#xa;负责一次业务动作的编排" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="510" y="150" width="260" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="domain" value="领域层&#xa;app/domain&#xa;&#xa;纯业务枚举、值对象、确定性策略&#xa;不依赖框架和数据库" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="510" y="430" width="260" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ports" value="Ports 协议&#xa;app/application/ports&#xa;由应用层定义需要什么能力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=15;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="510" y="345" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="infrastructure" value="基础设施适配层&#xa;app/infrastructure&#xa;&#xa;SQLAlchemy repository、model、Redis、scheduler、logging&#xa;负责技术实现细节" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=15;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="950" y="160" width="260" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="rule1" value="入口层只调用用例，不直接查数据库" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cccccc;fontSize=14;align=center;" vertex="1" parent="1">
+          <mxGeometry x="70" y="620" width="330" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="rule2" value="应用层依赖 ports，不依赖具体 repository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cccccc;fontSize=14;align=center;" vertex="1" parent="1">
+          <mxGeometry x="475" y="620" width="330" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="rule3" value="基础设施实现 ports，技术细节留在外层" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cccccc;fontSize=14;align=center;" vertex="1" parent="1">
+          <mxGeometry x="880" y="620" width="330" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" value="调用用例" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#3c78d8;fontSize=13;" edge="1" parent="1" source="interface" target="application"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge2" value="依赖协议" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#674ea7;fontSize=13;" edge="1" parent="1" source="application" target="ports"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge3" value="使用业务规则" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#6aa84f;fontSize=13;" edge="1" parent="1" source="application" target="domain"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge4" value="实现协议" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#674ea7;fontSize=13;" edge="1" parent="1" source="infrastructure" target="ports"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge5" value="composition root 组装具体实现" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#b85450;fontSize=13;dashed=1;" edge="1" parent="1" source="interface" target="infrastructure"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

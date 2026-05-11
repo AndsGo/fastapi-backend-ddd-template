@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="620" viewBox="0 0 1400 620" role="img" aria-labelledby="title desc">
+  <title id="title">HTTP request flow through DDD layers</title>
+  <desc id="desc">Flow diagram from client to endpoint, schema, DTO, use case, port, repository, model, and database.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#333"/></marker>
+    <style>
+      text { font-family: Arial, "Microsoft YaHei", sans-serif; fill: #222; }
+      .box { rx: 8; ry: 8; stroke-width: 2; }
+      .title { font-size: 24px; font-weight: 700; text-anchor: middle; }
+      .h { font-size: 14px; font-weight: 700; text-anchor: middle; }
+      .b { font-size: 12px; text-anchor: middle; }
+      .label { font-size: 12px; text-anchor: middle; fill: #444; }
+      .edge { stroke: #333; stroke-width: 2.3; marker-end: url(#arrow); fill: none; }
+      .dash { stroke-dasharray: 8 6; }
+    </style>
+  </defs>
+  <rect width="1400" height="620" fill="#fff"/>
+  <text x="700" y="48" class="title">HTTP request flow through the DDD layers</text>
+  <rect x="40" y="150" width="130" height="70" class="box" fill="#f5f5f5" stroke="#666"/><text x="105" y="191" class="h">Client</text>
+  <rect x="240" y="140" width="170" height="90" class="box" fill="#dae8fc" stroke="#6c8ebf"/><text x="325" y="172" class="h">Endpoint</text><text x="325" y="196" class="b">app/interface/http/v1/endpoints</text>
+  <rect x="240" y="285" width="170" height="80" class="box" fill="#dae8fc" stroke="#6c8ebf"/><text x="325" y="316" class="h">HTTP schema</text><text x="325" y="340" class="b">app/interface/http/schemas</text>
+  <rect x="470" y="140" width="190" height="90" class="box" fill="#d5e8d4" stroke="#82b366"/><text x="565" y="172" class="h">Application DTO</text><text x="565" y="196" class="b">app/application/dto</text>
+  <rect x="470" y="285" width="190" height="80" class="box" fill="#dae8fc" stroke="#6c8ebf"/><text x="565" y="316" class="h">Provider / composition root</text><text x="565" y="340" class="b">wires concrete adapters</text>
+  <rect x="720" y="140" width="170" height="90" class="box" fill="#d5e8d4" stroke="#82b366"/><text x="805" y="172" class="h">Use case</text><text x="805" y="196" class="b">app/application/*</text>
+  <rect x="960" y="140" width="170" height="90" class="box" fill="#e1d5e7" stroke="#9673a6"/><text x="1045" y="172" class="h">Port Protocol</text><text x="1045" y="196" class="b">app/application/ports</text>
+  <rect x="1200" y="140" width="170" height="90" class="box" fill="#f8cecc" stroke="#b85450"/><text x="1285" y="172" class="h">Repository adapter</text><text x="1285" y="196" class="b">app/infrastructure/persistence</text><text x="1285" y="214" class="b">/repositories</text>
+  <rect x="1200" y="285" width="170" height="80" class="box" fill="#f8cecc" stroke="#b85450"/><text x="1285" y="316" class="h">Persistence model</text><text x="1285" y="340" class="b">app/infrastructure/persistence/models</text>
+  <path d="M1210 450 Q1210 430 1285 430 Q1360 430 1360 450 L1360 490 Q1360 510 1285 510 Q1210 510 1210 490 Z" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/><ellipse cx="1285" cy="450" rx="75" ry="20" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/><text x="1285" y="478" class="h">Database</text>
+  <line x1="170" y1="185" x2="240" y2="185" class="edge"/><text x="205" y="176" class="label">HTTP request</text>
+  <line x1="325" y1="230" x2="325" y2="285" class="edge"/><text x="255" y="262" class="label">validate</text>
+  <line x1="410" y1="185" x2="470" y2="185" class="edge"/><text x="440" y="176" class="label">map to command/query</text>
+  <line x1="660" y1="185" x2="720" y2="185" class="edge"/><text x="690" y="176" class="label">execute</text>
+  <line x1="890" y1="185" x2="960" y2="185" class="edge"/><text x="925" y="176" class="label">calls contract</text>
+  <line x1="1200" y1="185" x2="1130" y2="185" class="edge"/><text x="1165" y="176" class="label">implements</text>
+  <line x1="1285" y1="230" x2="1285" y2="285" class="edge"/><text x="1340" y="263" class="label">query</text>
+  <line x1="1285" y1="365" x2="1285" y2="430" class="edge"/><text x="1338" y="403" class="label">read/write</text>
+  <line x1="565" y1="285" x2="740" y2="230" class="edge dash"/><text x="645" y="250" class="label">inject use case</text>
+  <line x1="660" y1="325" x2="1200" y2="210" class="edge dash"/><text x="930" y="295" class="label">repository instance</text>
+</svg>

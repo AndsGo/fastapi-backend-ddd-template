@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+  <title id="title">DDD-oriented modular monolith architecture</title>
+  <desc id="desc">Layer diagram showing interface adapters, application use cases and ports, domain, infrastructure adapters, config, and shared primitives.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#3c78d8"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#6aa84f"/></marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#674ea7"/></marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#b85450"/></marker>
+    <style>
+      text { font-family: Arial, "Microsoft YaHei", sans-serif; fill: #222; }
+      .box { rx: 8; ry: 8; stroke-width: 2; }
+      .title { font-size: 24px; font-weight: 700; text-anchor: middle; }
+      .h { font-size: 16px; font-weight: 700; text-anchor: middle; }
+      .b { font-size: 13px; text-anchor: middle; }
+      .label { font-size: 12px; text-anchor: middle; fill: #444; }
+    </style>
+  </defs>
+  <rect width="1280" height="760" fill="#fff"/>
+  <text x="640" y="48" class="title">DDD-oriented modular monolith architecture</text>
+  <rect x="90" y="110" width="250" height="170" class="box" fill="#dae8fc" stroke="#6c8ebf"/>
+  <text x="215" y="145" class="h">Interface adapters</text><text x="215" y="172" class="b">app/interface/http</text><text x="215" y="194" class="b">app/interface/jobs/handlers</text><text x="215" y="226" class="b">HTTP schemas, endpoints, job handlers,</text><text x="215" y="248" class="b">composition roots</text>
+  <rect x="515" y="110" width="250" height="170" class="box" fill="#d5e8d4" stroke="#82b366"/>
+  <text x="640" y="145" class="h">Application layer</text><text x="640" y="172" class="b">app/application</text><text x="640" y="206" class="b">Use cases, orchestration, DTOs,</text><text x="640" y="228" class="b">errors, ports</text>
+  <rect x="515" y="305" width="250" height="80" class="box" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="640" y="336" class="h">Ports</text><text x="640" y="360" class="b">Provider-neutral Protocols owned by application</text>
+  <rect x="515" y="420" width="250" height="150" class="box" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="640" y="455" class="h">Domain layer</text><text x="640" y="482" class="b">app/domain</text><text x="640" y="514" class="b">Pure business enums, value objects,</text><text x="640" y="536" class="b">deterministic policies</text>
+  <rect x="940" y="110" width="250" height="170" class="box" fill="#f8cecc" stroke="#b85450"/>
+  <text x="1065" y="145" class="h">Infrastructure adapters</text><text x="1065" y="172" class="b">app/infrastructure</text><text x="1065" y="206" class="b">SQLAlchemy repositories, models, Redis,</text><text x="1065" y="228" class="b">scheduler, logging, database session</text>
+  <rect x="90" y="420" width="250" height="120" class="box" fill="#f5f5f5" stroke="#666"/>
+  <text x="215" y="455" class="h">Shared primitives</text><text x="215" y="482" class="b">app/shared</text><text x="215" y="514" class="b">Stable cross-layer primitives only</text>
+  <rect x="940" y="420" width="250" height="120" class="box" fill="#f5f5f5" stroke="#666"/>
+  <text x="1065" y="455" class="h">Config</text><text x="1065" y="482" class="b">app/config/settings.py</text><text x="1065" y="514" class="b">Only place that reads env vars</text>
+  <line x1="340" y1="195" x2="515" y2="195" stroke="#3c78d8" stroke-width="2.5" marker-end="url(#arrow-blue)"/><text x="427" y="184" class="label">calls use cases</text>
+  <line x1="640" y1="280" x2="640" y2="305" stroke="#674ea7" stroke-width="2.5" marker-end="url(#arrow-purple)"/><text x="720" y="300" class="label">depends on contracts</text>
+  <line x1="640" y1="385" x2="640" y2="420" stroke="#6aa84f" stroke-width="2.5" marker-end="url(#arrow-green)"/><text x="730" y="410" class="label">uses business rules</text>
+  <line x1="940" y1="195" x2="765" y2="345" stroke="#674ea7" stroke-width="2.5" marker-end="url(#arrow-purple)"/><text x="870" y="250" class="label">implements ports</text>
+  <line x1="340" y1="250" x2="940" y2="250" stroke="#b85450" stroke-width="2.5" stroke-dasharray="8 6" marker-end="url(#arrow-red)"/><text x="640" y="242" class="label">composition roots wire concrete adapters</text>
+  <rect x="280" y="630" width="720" height="60" class="box" fill="#fff" stroke="#ccc"/>
+  <text x="640" y="655" class="b">Runtime wiring happens at the outer edge. Inner layers define behavior and contracts;</text><text x="640" y="677" class="b">outer adapters translate protocols and technology details.</text>
+</svg>

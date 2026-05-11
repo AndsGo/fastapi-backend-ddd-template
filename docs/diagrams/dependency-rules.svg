@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="820" viewBox="0 0 1320 820" role="img" aria-labelledby="title desc">
+  <title id="title">Dependency direction rules</title>
+  <desc id="desc">Allowed dependency directions and common forbidden imports enforced by importlinter and architecture tests.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#333"/></marker>
+    <style>
+      text { font-family: Arial, "Microsoft YaHei", sans-serif; fill: #222; }
+      .box { rx: 8; ry: 8; stroke-width: 2; }
+      .title { font-size: 24px; font-weight: 700; text-anchor: middle; }
+      .section { font-size: 18px; font-weight: 700; text-anchor: middle; }
+      .h { font-size: 14px; font-weight: 700; text-anchor: middle; }
+      .b { font-size: 12px; text-anchor: middle; }
+      .label { font-size: 12px; text-anchor: middle; fill: #444; }
+      .edge { stroke: #333; stroke-width: 2.3; marker-end: url(#arrow); fill: none; }
+      .dash { stroke-dasharray: 8 6; }
+    </style>
+  </defs>
+  <rect width="1320" height="820" fill="#fff"/>
+  <text x="660" y="48" class="title">Dependency direction rules</text>
+  <text x="340" y="108" class="section">Allowed dependency direction</text>
+  <text x="980" y="108" class="section">Common forbidden imports</text>
+  <rect x="80" y="150" width="220" height="80" class="box" fill="#dae8fc" stroke="#6c8ebf"/><text x="190" y="181" class="h">interface</text><text x="190" y="205" class="b">HTTP and job delivery adapters</text>
+  <rect x="80" y="290" width="220" height="80" class="box" fill="#d5e8d4" stroke="#82b366"/><text x="190" y="321" class="h">application</text><text x="190" y="345" class="b">use cases, DTOs, ports</text>
+  <rect x="80" y="430" width="220" height="80" class="box" fill="#fff2cc" stroke="#d6b656"/><text x="190" y="461" class="h">domain</text><text x="190" y="485" class="b">pure business rules</text>
+  <rect x="400" y="290" width="220" height="80" class="box" fill="#e1d5e7" stroke="#9673a6"/><text x="510" y="321" class="h">application.ports</text><text x="510" y="345" class="b">provider-neutral protocols</text>
+  <rect x="400" y="430" width="220" height="80" class="box" fill="#f8cecc" stroke="#b85450"/><text x="510" y="461" class="h">infrastructure repositories</text><text x="510" y="485" class="b">SQLAlchemy adapters</text>
+  <rect x="400" y="570" width="220" height="80" class="box" fill="#f8cecc" stroke="#b85450"/><text x="510" y="601" class="h">persistence models</text><text x="510" y="625" class="b">database table mappings</text>
+  <line x1="190" y1="230" x2="190" y2="290" class="edge"/><text x="220" y="265" class="label">calls</text>
+  <line x1="190" y1="370" x2="190" y2="430" class="edge"/><text x="218" y="405" class="label">uses</text>
+  <line x1="300" y1="330" x2="400" y2="330" class="edge"/><text x="350" y="320" class="label">depends on</text>
+  <line x1="510" y1="430" x2="510" y2="370" class="edge"/><text x="555" y="405" class="label">implements</text>
+  <line x1="510" y1="510" x2="510" y2="570" class="edge"/><text x="540" y="545" class="label">maps</text>
+  <line x1="300" y1="210" x2="400" y2="450" class="edge dash"/><text x="390" y="270" class="label">composition roots only</text>
+  <rect x="760" y="150" width="460" height="60" class="box" fill="#f8cecc" stroke="#b85450"/><text x="990" y="185" class="h">application must not import interface or infrastructure</text>
+  <rect x="760" y="240" width="460" height="80" class="box" fill="#f8cecc" stroke="#b85450"/><text x="990" y="271" class="h">domain must not import frameworks or outer layers</text><text x="990" y="295" class="b">FastAPI, SQLAlchemy, Pydantic, Redis, application, interface, infrastructure, config, services</text>
+  <rect x="760" y="350" width="460" height="60" class="box" fill="#f8cecc" stroke="#b85450"/><text x="990" y="385" class="h">application.ports must not expose technology details or DTOs</text>
+  <rect x="760" y="440" width="460" height="60" class="box" fill="#f8cecc" stroke="#b85450"/><text x="990" y="475" class="h">HTTP schemas must not import or subclass application DTOs</text>
+  <rect x="760" y="530" width="460" height="80" class="box" fill="#f8cecc" stroke="#b85450"/><text x="990" y="561" class="h">repositories must not import use cases or interface adapters</text><text x="990" y="585" class="b">also avoid application DTOs, application errors, and infrastructure jobs</text>
+  <rect x="270" y="700" width="780" height="60" class="box" fill="#fff" stroke="#ccc"/>
+  <text x="660" y="725" class="b">These constraints are enforced by .importlinter and architecture tests.</text><text x="660" y="747" class="b">Discuss the architecture before intentionally breaking one.</text>
+</svg>

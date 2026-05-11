@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+  <title id="title">FastAPI 模板中的严格 DDD 分层</title>
+  <desc id="desc">中文 DDD 架构图，说明 interface、application、domain、ports、infrastructure 的职责和依赖方向。</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#3c78d8"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#6aa84f"/></marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#674ea7"/></marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#b85450"/></marker>
+    <style>
+      text { font-family: Arial, "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #222; }
+      .box { rx: 8; ry: 8; stroke-width: 2; }
+      .title { font-size: 26px; font-weight: 700; text-anchor: middle; }
+      .subtitle { font-size: 16px; text-anchor: middle; fill: #555; }
+      .h { font-size: 17px; font-weight: 700; text-anchor: middle; }
+      .b { font-size: 14px; text-anchor: middle; }
+      .label { font-size: 13px; text-anchor: middle; fill: #444; }
+    </style>
+  </defs>
+  <rect width="1280" height="760" fill="#fff"/>
+  <text x="640" y="50" class="title">FastAPI 模板中的严格 DDD 分层</text>
+  <text x="640" y="82" class="subtitle">业务意图向内收敛，技术细节向外隔离</text>
+  <rect x="70" y="160" width="260" height="150" class="box" fill="#dae8fc" stroke="#6c8ebf"/>
+  <text x="200" y="193" class="h">入口适配层</text><text x="200" y="219" class="b">app/interface</text><text x="200" y="250" class="b">HTTP endpoint、schema、job handler</text><text x="200" y="274" class="b">负责协议适配和依赖组装</text>
+  <rect x="510" y="150" width="260" height="170" class="box" fill="#d5e8d4" stroke="#82b366"/>
+  <text x="640" y="185" class="h">应用层</text><text x="640" y="211" class="b">app/application</text><text x="640" y="242" class="b">use case、DTO、ports、应用异常</text><text x="640" y="266" class="b">负责一次业务动作的编排</text>
+  <rect x="510" y="345" width="260" height="70" class="box" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="640" y="374" class="h">Ports 协议</text><text x="640" y="398" class="b">由应用层定义需要什么能力</text>
+  <rect x="510" y="430" width="260" height="150" class="box" fill="#fff2cc" stroke="#d6b656"/>
+  <text x="640" y="463" class="h">领域层</text><text x="640" y="489" class="b">app/domain</text><text x="640" y="520" class="b">纯业务枚举、值对象、确定性策略</text><text x="640" y="544" class="b">不依赖框架和数据库</text>
+  <rect x="950" y="160" width="260" height="150" class="box" fill="#f8cecc" stroke="#b85450"/>
+  <text x="1080" y="193" class="h">基础设施适配层</text><text x="1080" y="219" class="b">app/infrastructure</text><text x="1080" y="250" class="b">SQLAlchemy、Redis、scheduler</text><text x="1080" y="274" class="b">负责技术实现细节</text>
+  <line x1="330" y1="235" x2="510" y2="235" stroke="#3c78d8" stroke-width="2.5" marker-end="url(#arrow-blue)"/><text x="420" y="224" class="label">调用用例</text>
+  <line x1="640" y1="320" x2="640" y2="345" stroke="#674ea7" stroke-width="2.5" marker-end="url(#arrow-purple)"/><text x="718" y="340" class="label">依赖协议</text>
+  <line x1="640" y1="415" x2="640" y2="430" stroke="#6aa84f" stroke-width="2.5" marker-end="url(#arrow-green)"/><text x="728" y="427" class="label">使用业务规则</text>
+  <line x1="950" y1="235" x2="770" y2="380" stroke="#674ea7" stroke-width="2.5" marker-end="url(#arrow-purple)"/><text x="858" y="282" class="label">实现协议</text>
+  <line x1="330" y1="286" x2="950" y2="286" stroke="#b85450" stroke-width="2.5" stroke-dasharray="8 6" marker-end="url(#arrow-red)"/><text x="640" y="278" class="label">composition root 组装具体实现</text>
+  <rect x="70" y="620" width="330" height="48" class="box" fill="#fff" stroke="#ccc"/><text x="235" y="650" class="b">入口层只调用用例，不直接查数据库</text>
+  <rect x="475" y="620" width="330" height="48" class="box" fill="#fff" stroke="#ccc"/><text x="640" y="650" class="b">应用层依赖 ports，不依赖具体 repository</text>
+  <rect x="880" y="620" width="330" height="48" class="box" fill="#fff" stroke="#ccc"/><text x="1045" y="650" class="b">基础设施实现 ports，技术细节留在外层</text>
+</svg>

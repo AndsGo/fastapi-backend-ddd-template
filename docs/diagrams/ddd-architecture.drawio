@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net" modified="2026-05-11T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="ddd-architecture" name="DDD Architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1280" pageHeight="760" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="DDD-oriented modular monolith architecture" style="text;html=1;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="260" y="20" width="760" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="interface" value="Interface adapters&#xa;app/interface/http&#xa;app/interface/jobs/handlers&#xa;&#xa;HTTP schemas, endpoints, job handlers, composition roots" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="90" y="110" width="250" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="application" value="Application layer&#xa;app/application&#xa;&#xa;Use cases, orchestration, DTOs, errors, ports" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="515" y="110" width="250" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="domain" value="Domain layer&#xa;app/domain&#xa;&#xa;Pure business enums, value objects, deterministic policies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="515" y="420" width="250" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ports" value="Ports&#xa;app/application/ports&#xa;&#xa;Provider-neutral Protocols owned by application" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="515" y="305" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="infrastructure" value="Infrastructure adapters&#xa;app/infrastructure&#xa;&#xa;SQLAlchemy repositories, models, Redis, scheduler, logging, database session" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="940" y="110" width="250" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="config" value="Config&#xa;app/config/settings.py&#xa;&#xa;Only place that reads environment variables" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="940" y="420" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="shared" value="Shared primitives&#xa;app/shared&#xa;&#xa;Stable cross-layer primitives only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="90" y="420" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-interface-application" value="calls use cases" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#3c78d8;fontSize=12;" edge="1" parent="1" source="interface" target="application">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-application-domain" value="uses business rules" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#6aa84f;fontSize=12;" edge="1" parent="1" source="application" target="domain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-application-ports" value="depends on contracts" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#674ea7;fontSize=12;" edge="1" parent="1" source="application" target="ports">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-infra-ports" value="implements ports" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#674ea7;fontSize=12;" edge="1" parent="1" source="infrastructure" target="ports">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-interface-infra" value="composition roots wire concrete adapters" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#b85450;fontSize=12;dashed=1;" edge="1" parent="1" source="interface" target="infrastructure">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="Runtime wiring happens at the outer edge. Inner layers define behavior and contracts; outer adapters translate protocols and technology details." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cccccc;fontSize=13;align=center;" vertex="1" parent="1">
+          <mxGeometry x="280" y="630" width="720" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

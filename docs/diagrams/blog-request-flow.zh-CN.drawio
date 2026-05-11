@@ -1,0 +1,30 @@
+<mxfile host="app.diagrams.net" modified="2026-05-11T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="blog-request-flow-zh-cn" name="博客请求流程">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1360" pageHeight="620" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="一次 HTTP 请求在模板中的流动方式" style="text;html=1;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="320" y="24" width="720" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="client" value="客户端请求" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="50" y="160" width="130" height="70" as="geometry" /></mxCell>
+        <mxCell id="endpoint" value="Endpoint&#xa;接收 HTTP 请求&#xa;处理路由和依赖注入" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;align=center;" vertex="1" parent="1"><mxGeometry x="245" y="140" width="170" height="110" as="geometry" /></mxCell>
+        <mxCell id="schema" value="HTTP Schema&#xa;请求/响应契约&#xa;属于 interface 层" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;align=center;" vertex="1" parent="1"><mxGeometry x="245" y="320" width="170" height="90" as="geometry" /></mxCell>
+        <mxCell id="dto" value="Application DTO&#xa;用例输入/输出契约&#xa;不等同于 HTTP Schema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;align=center;" vertex="1" parent="1"><mxGeometry x="500" y="140" width="190" height="110" as="geometry" /></mxCell>
+        <mxCell id="usecase" value="Use Case&#xa;编排一次业务动作&#xa;检查规则并调用 port" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="770" y="140" width="180" height="110" as="geometry" /></mxCell>
+        <mxCell id="domain" value="Domain Policy&#xa;纯业务判断&#xa;无框架依赖" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;align=center;" vertex="1" parent="1"><mxGeometry x="770" y="320" width="180" height="90" as="geometry" /></mxCell>
+        <mxCell id="port" value="Port 协议&#xa;应用层提出能力需求" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;align=center;" vertex="1" parent="1"><mxGeometry x="1020" y="140" width="160" height="110" as="geometry" /></mxCell>
+        <mxCell id="repo" value="Repository Adapter&#xa;实现 port&#xa;封装 SQLAlchemy 查询" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;align=center;" vertex="1" parent="1"><mxGeometry x="1230" y="140" width="160" height="110" as="geometry" /></mxCell>
+        <mxCell id="db" value="数据库" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;fontStyle=1;align=center;" vertex="1" parent="1"><mxGeometry x="1235" y="330" width="150" height="80" as="geometry" /></mxCell>
+        <mxCell id="edge1" value="HTTP" style="endArrow=block;html=1;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="client" target="endpoint"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge2" value="校验/序列化" style="endArrow=block;html=1;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="endpoint" target="schema"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge3" value="转换为 command/query" style="endArrow=block;html=1;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="endpoint" target="dto"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge4" value="执行用例" style="endArrow=block;html=1;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="dto" target="usecase"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge5" value="调用业务规则" style="endArrow=block;html=1;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="usecase" target="domain"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge6" value="依赖抽象能力" style="endArrow=block;html=1;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="usecase" target="port"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge7" value="实现协议" style="endArrow=block;html=1;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="repo" target="port"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="edge8" value="读写数据" style="endArrow=block;html=1;rounded=0;strokeWidth=2;fontSize=12;" edge="1" parent="1" source="repo" target="db"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

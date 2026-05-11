@@ -1,0 +1,22 @@
+stages:
+  - verify
+
+gate:
+  stage: verify
+  image: python:3.11
+  cache:
+    key:
+      files:
+        - pyproject.toml
+    paths:
+      - .cache/pip
+  variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  before_script:
+    - python -m pip install --upgrade pip
+    - python -m pip install -e ".[dev]"
+  script:
+    - python -m ruff check .
+    - python -c "from importlinter.cli import lint_imports_command; lint_imports_command()"
+    - python -m mypy app
+    - python -m pytest

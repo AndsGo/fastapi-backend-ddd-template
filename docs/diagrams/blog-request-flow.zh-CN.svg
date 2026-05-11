@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="620" viewBox="0 0 1360 620" role="img" aria-labelledby="title desc">
+  <title id="title">一次 HTTP 请求在模板中的流动方式</title>
+  <desc id="desc">中文请求流程图，展示客户端请求经过 endpoint、schema、DTO、use case、domain、port、repository 和数据库的路径。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#333"/></marker>
+    <style>
+      text { font-family: Arial, "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #222; }
+      .box { rx: 8; ry: 8; stroke-width: 2; }
+      .title { font-size: 26px; font-weight: 700; text-anchor: middle; }
+      .h { font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .b { font-size: 13px; text-anchor: middle; }
+      .label { font-size: 12px; text-anchor: middle; fill: #444; }
+      .edge { stroke: #333; stroke-width: 2.3; marker-end: url(#arrow); fill: none; }
+    </style>
+  </defs>
+  <rect width="1360" height="620" fill="#fff"/>
+  <text x="680" y="52" class="title">一次 HTTP 请求在模板中的流动方式</text>
+  <rect x="50" y="160" width="130" height="70" class="box" fill="#f5f5f5" stroke="#666"/><text x="115" y="200" class="h">客户端请求</text>
+  <rect x="245" y="140" width="170" height="110" class="box" fill="#dae8fc" stroke="#6c8ebf"/><text x="330" y="172" class="h">Endpoint</text><text x="330" y="198" class="b">接收 HTTP 请求</text><text x="330" y="222" class="b">处理路由和依赖注入</text>
+  <rect x="245" y="320" width="170" height="90" class="box" fill="#dae8fc" stroke="#6c8ebf"/><text x="330" y="350" class="h">HTTP Schema</text><text x="330" y="374" class="b">请求/响应契约</text><text x="330" y="396" class="b">属于 interface 层</text>
+  <rect x="500" y="140" width="190" height="110" class="box" fill="#d5e8d4" stroke="#82b366"/><text x="595" y="172" class="h">Application DTO</text><text x="595" y="198" class="b">用例输入/输出契约</text><text x="595" y="222" class="b">不等同于 HTTP Schema</text>
+  <rect x="770" y="140" width="180" height="110" class="box" fill="#d5e8d4" stroke="#82b366"/><text x="860" y="172" class="h">Use Case</text><text x="860" y="198" class="b">编排一次业务动作</text><text x="860" y="222" class="b">检查规则并调用 port</text>
+  <rect x="770" y="320" width="180" height="90" class="box" fill="#fff2cc" stroke="#d6b656"/><text x="860" y="350" class="h">Domain Policy</text><text x="860" y="374" class="b">纯业务判断</text><text x="860" y="396" class="b">无框架依赖</text>
+  <rect x="1020" y="140" width="160" height="110" class="box" fill="#e1d5e7" stroke="#9673a6"/><text x="1100" y="178" class="h">Port 协议</text><text x="1100" y="205" class="b">应用层提出</text><text x="1100" y="229" class="b">能力需求</text>
+  <rect x="1230" y="140" width="160" height="110" class="box" fill="#f8cecc" stroke="#b85450"/><text x="1310" y="172" class="h">Repository Adapter</text><text x="1310" y="198" class="b">实现 port</text><text x="1310" y="222" class="b">封装 SQLAlchemy 查询</text>
+  <path d="M1235 350 Q1235 330 1310 330 Q1385 330 1385 350 L1385 390 Q1385 410 1310 410 Q1235 410 1235 390 Z" fill="#fff2cc" stroke="#d6b656" stroke-width="2" transform="translate(-25 0)"/><ellipse cx="1285" cy="350" rx="75" ry="20" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/><text x="1285" y="380" class="h">数据库</text>
+  <line x1="180" y1="195" x2="245" y2="195" class="edge"/><text x="212" y="184" class="label">HTTP</text>
+  <line x1="330" y1="250" x2="330" y2="320" class="edge"/><text x="275" y="288" class="label">校验/序列化</text>
+  <line x1="415" y1="195" x2="500" y2="195" class="edge"/><text x="457" y="184" class="label">转换为 command/query</text>
+  <line x1="690" y1="195" x2="770" y2="195" class="edge"/><text x="730" y="184" class="label">执行用例</text>
+  <line x1="860" y1="250" x2="860" y2="320" class="edge"/><text x="920" y="288" class="label">调用业务规则</text>
+  <line x1="950" y1="195" x2="1020" y2="195" class="edge"/><text x="985" y="184" class="label">依赖抽象能力</text>
+  <line x1="1230" y1="195" x2="1180" y2="195" class="edge"/><text x="1205" y="184" class="label">实现协议</text>
+  <line x1="1310" y1="250" x2="1285" y2="330" class="edge"/><text x="1330" y="294" class="label">读写数据</text>
+</svg>
